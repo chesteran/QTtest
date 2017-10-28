@@ -48,45 +48,106 @@ void MainWindow::on_pushButton_clicked()
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
 
-    programming=new ProGramming(this);
-    programming->show();
-   // ui->label_15->show();
- //   ui->textEdit_14->show();
+    ///set equation
+    double A[5][11] = {
+            {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
+            {0.07,23.7,0,0.1,19.2,5.6,1.6,0.6,15471,5.1,14.9},
+            {0.06,171.5,0,0.2,15.2,19.9,3.2,3.7,0,15.6,22.7},
+            {0.84,277.4,129.9,10.8,125.6,0,0,42.2,77.4,0,21.9},
+            {0.78,358.2,0,12.3,1237.1,58.3,11.6,8.2,3055.2,27.9,80.2}
+    };
+    //money
+    QTextEdit buf;
+    buf.insertPlainText("min z = ");
+    buf.moveCursor(QTextCursor::End);
+    buf.insertPlainText(QString::number(A[0][0]) + "x" + QString::number(0));
+    buf.moveCursor(QTextCursor::End);
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
 
-///////////////////////////////////////////////////////////////read file
+    //kcal
+    buf.append(QString::number(A[0][1]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][1]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(kcal));
+    //protein
+    buf.append(QString::number(A[0][2]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][2]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(protein));
+    //carbohydrate
+    buf.append(QString::number(A[0][3]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][3]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(carbohydrate));
+    //vitaminA
+    buf.append(QString::number(A[0][4]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][4]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(vitaminA));
+    //calcium
+    buf.append(QString::number(A[0][5]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][5]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(calcium));
+    //fat
+    buf.append(QString::number(A[0][6]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][6]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(fat));
+    //cholesterol
+    buf.append(QString::number(A[0][7]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][7]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(cholesterol));
+    //sodium
+    buf.append(QString::number(A[0][8]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][8]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(sodium));
+    //fiber
+    buf.append(QString::number(A[0][9]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][9]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(fiber));
+    //vitaminC
+    buf.append(QString::number(A[0][10]) + "x" + QString::number(0));
+    for (int i = 1; i < 5; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][10]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(" <= " + QString::number(vitaminC));
 
-
-   // QFile inputFile("/home/user/文件/testQT/in.txt");
-   // inputFile.open(QIODevice::ReadOnly);
-   // if (!inputFile.isOpen())
-     //   return;
-
-   // QTextStream stream(&inputFile);
-  //  QString line = stream.readLine();
- //   ui->textEdit_14->clear();
-  //  if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
- //   while (!stream.atEnd()) {
-        /* process information */
-
-    //    line = stream.readLine();
-      //  ui->textEdit_14->append(line);
- //   ui->textEdit_14->setText(ui->textEdit_14->toPlainText()+line+"\n");
-
-   //  qDebug() << "linea: "<<line;
-   // };
-   // }
-  /*  QFile file("out.txt");
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        return;
-
+    ///write file
+    QFile file;
+    file.setFileName("model");
+    file.open(QIODevice::Append | QIODevice::Text);
     QTextStream out(&file);
-    out << "The magic number is: " << 49 << "\n";
-    ui->textEdit_14->append(line);*/
-  //  file.close();
+    out << buf.toPlainText() << endl;
 
+    programming=new ProGramming(this, buf.toPlainText());
+    programming->show();
 }
-
-
 
 void MainWindow::on_checkBox_5_clicked()
 {

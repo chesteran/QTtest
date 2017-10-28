@@ -18,7 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public:
-  //  int gender;
+    int gender;
     static void process_line(const QByteArray &)
     {
     }
@@ -53,8 +53,6 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
-
 
     void on_checkBox_5_clicked();
 
