@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     foodlist.cpp \
-    programming.cpp
+    programming.cpp \
+    simplex.cpp
 
 HEADERS += \
         mainwindow.h \
     foodlist.h \
-    programming.h
+    programming.h \
+    simplex.h
 
 FORMS += \
         mainwindow.ui \
