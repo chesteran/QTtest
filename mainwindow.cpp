@@ -8,12 +8,16 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include "foodlist.h"
+
+#define NUM_FOOD 6
+
 #include "programming.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)  
 {
     ui->setupUi(this);
+
 
 }
 
@@ -47,92 +51,103 @@ void MainWindow::on_pushButton_clicked()
     fiber=fibert.toDouble();
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
-
+//money cal pro carbo vA ca fat chol so fib vc
     ///set equation
-    double A[5][11] = {
+  /*  double A[5][11] = {
             {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
             {0.07,23.7,0,0.1,19.2,5.6,1.6,0.6,15471,5.1,14.9},
             {0.06,171.5,0,0.2,15.2,19.9,3.2,3.7,0,15.6,22.7},
             {0.84,277.4,129.9,10.8,125.6,0,0,42.2,77.4,0,21.9},
             {0.78,358.2,0,12.3,1237.1,58.3,11.6,8.2,3055.2,27.9,80.2}
     };
+    */
+
+    double A[NUM_FOOD][11] = {
+            {100,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
+            {100,23.7,0.0,0.1,19.2,5.6,1.6,0.6,15471,5.1,14.9},
+            {100,72.2,0.0,0.6,2.5,17.1,2.0,2.5,106.6,5.2,3.3},
+            {100,46.4,0.0,0.3,3.8,11.3,2.6,0.8,133.0,74.5,19.8},
+            {100,99.6,211.2,7.3,168.0,1.3,0.0,6.7,409.2,0.1,42.6},
+            {100,369.4,56.4,20.6,802.0,26.7,0.0,20.7,855.0,2.2,220.6}
+    };
+
     //money
     QTextEdit buf;
     buf.insertPlainText("min z = ");
     buf.moveCursor(QTextCursor::End);
     buf.insertPlainText(QString::number(A[0][0]) + "x" + QString::number(0));
     buf.moveCursor(QTextCursor::End);
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
 
     //kcal
     buf.append(QString::number(A[0][1]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][1]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(kcal));
     //protein
     buf.append(QString::number(A[0][2]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][2]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(protein));
     //carbohydrate
     buf.append(QString::number(A[0][3]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][3]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(carbohydrate));
     //vitaminA
     buf.append(QString::number(A[0][4]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][4]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(vitaminA));
     //calcium
     buf.append(QString::number(A[0][5]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][5]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(calcium));
     //fat
     buf.append(QString::number(A[0][6]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][6]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(fat));
     //cholesterol
     buf.append(QString::number(A[0][7]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][7]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(cholesterol));
     //sodium
     buf.append(QString::number(A[0][8]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][8]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(sodium));
     //fiber
     buf.append(QString::number(A[0][9]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][9]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
     buf.insertPlainText(" <= " + QString::number(fiber));
     //vitaminC
     buf.append(QString::number(A[0][10]) + "x" + QString::number(0));
-    for (int i = 1; i < 5; i++){
+    for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][10]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
