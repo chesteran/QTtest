@@ -73,6 +73,7 @@ void MainWindow::on_pushButton_clicked()
 
     //money
     QTextEdit buf;
+    QTextCursor cursor = buf.textCursor();
     buf.insertPlainText("min z = ");
     buf.moveCursor(QTextCursor::End);
     buf.insertPlainText(QString::number(A[0][0]) + "x" + QString::number(0));
@@ -88,70 +89,157 @@ void MainWindow::on_pushButton_clicked()
         buf.insertPlainText(" + " + QString::number(A[i][1]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(kcal));
+
+    //buf.insertPlainText( QString::number(kcal));
+    buf.insertPlainText(limitscal + QString::number(kcal));
+    if(ignorecal){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
+
+
+
     //protein
     buf.append(QString::number(A[0][2]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][2]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(protein));
+    buf.insertPlainText(limitspro + QString::number(protein));
+    if(ignorepro){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //carbohydrate
     buf.append(QString::number(A[0][3]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][3]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(carbohydrate));
+    buf.insertPlainText(limitscar + QString::number(carbohydrate));
+    if(ignorecar){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //vitaminA
     buf.append(QString::number(A[0][4]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][4]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(vitaminA));
+    buf.insertPlainText(limitsvA + QString::number(vitaminA));
+    if(ignorevA){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //calcium
     buf.append(QString::number(A[0][5]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][5]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(calcium));
+    buf.insertPlainText(limitsca + QString::number(calcium));
+    if(ignoreca){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //fat
     buf.append(QString::number(A[0][6]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][6]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(fat));
+    buf.insertPlainText(limitsfat + QString::number(fat));
+    if(ignorefat){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //cholesterol
     buf.append(QString::number(A[0][7]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][7]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(cholesterol));
+    buf.insertPlainText(limitscho + QString::number(cholesterol));
+    if(ignorecho){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //sodium
     buf.append(QString::number(A[0][8]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][8]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(sodium));
+    buf.insertPlainText(limitsna + QString::number(sodium));
+    if(ignorena){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //fiber
     buf.append(QString::number(A[0][9]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][9]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(fiber));
+    buf.insertPlainText(limitsfib + QString::number(fiber));
+    if(ignorefib){
+
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
     //vitaminC
     buf.append(QString::number(A[0][10]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][10]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
-    buf.insertPlainText(" <= " + QString::number(vitaminC));
+    buf.insertPlainText(limitsvC + QString::number(vitaminC));
+    if(ignorevC){
+//QTextCursor cursor = buf.textCursor();
+cursor.movePosition(QTextCursor::End);
+cursor.select(QTextCursor::LineUnderCursor);
+cursor.removeSelectedText();
+cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
+
+
 
     ///write file
     QFile file;
@@ -170,6 +258,8 @@ void MainWindow::on_checkBox_5_clicked()
         {ui->checkBox_6->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_4->isChecked())
         {ui->checkBox_4->setCheckState(Qt::Unchecked);}
+    limitscost=">=";
+    ignorecost=0;
 }
 
 void MainWindow::on_checkBox_4_clicked()
@@ -178,6 +268,9 @@ void MainWindow::on_checkBox_4_clicked()
         {ui->checkBox_6->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_5->isChecked())
         {ui->checkBox_5->setCheckState(Qt::Unchecked);}
+    limitscost="<=";
+    ignorecost=0;
+
 }
 
 void MainWindow::on_checkBox_6_clicked()
@@ -186,6 +279,7 @@ void MainWindow::on_checkBox_6_clicked()
         {ui->checkBox_5->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_4->isChecked())
         {ui->checkBox_4->setCheckState(Qt::Unchecked);}
+    ignorecost=1;
 }
 
 void MainWindow::on_checkBox_8_clicked()
@@ -194,6 +288,8 @@ void MainWindow::on_checkBox_8_clicked()
         {ui->checkBox_7->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_9->isChecked())
         {ui->checkBox_9->setCheckState(Qt::Unchecked);}
+    limitscal=">=";
+    ignorecal=0;
 }
 
 void MainWindow::on_checkBox_7_clicked()
@@ -202,6 +298,8 @@ void MainWindow::on_checkBox_7_clicked()
         {ui->checkBox_8->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_9->isChecked())
         {ui->checkBox_9->setCheckState(Qt::Unchecked);}
+    limitscal="<=";
+    ignorecal=0;
 }
 
 void MainWindow::on_checkBox_9_clicked()
@@ -210,6 +308,8 @@ void MainWindow::on_checkBox_9_clicked()
         {ui->checkBox_7->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_8->isChecked())
         {ui->checkBox_8->setCheckState(Qt::Unchecked);}
+   // limitscal="not relate to ";
+    ignorecal=1;
 }
 
 void MainWindow::on_checkBox_11_clicked()
@@ -218,6 +318,8 @@ void MainWindow::on_checkBox_11_clicked()
         {ui->checkBox_10->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_12->isChecked())
         {ui->checkBox_12->setCheckState(Qt::Unchecked);}
+    limitspro=">=";
+    ignorepro=0;
 }
 
 void MainWindow::on_checkBox_10_clicked()
@@ -226,6 +328,8 @@ void MainWindow::on_checkBox_10_clicked()
         {ui->checkBox_11->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_12->isChecked())
         {ui->checkBox_12->setCheckState(Qt::Unchecked);}
+    limitspro="<=";
+    ignorepro=0;
 }
 
 void MainWindow::on_checkBox_12_clicked()
@@ -234,6 +338,8 @@ void MainWindow::on_checkBox_12_clicked()
         {ui->checkBox_10->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_11->isChecked())
         {ui->checkBox_11->setCheckState(Qt::Unchecked);}
+    //limitspro="not relate to ";
+    ignorepro=1;
 }
 
 void MainWindow::on_checkBox_22_clicked()
@@ -242,6 +348,8 @@ void MainWindow::on_checkBox_22_clicked()
         {ui->checkBox_26->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_27->isChecked())
         {ui->checkBox_27->setCheckState(Qt::Unchecked);}
+    //limitscar="not relate to ";
+    ignorecar=1;
 }
 
 void MainWindow::on_checkBox_27_clicked()
@@ -250,6 +358,8 @@ void MainWindow::on_checkBox_27_clicked()
         {ui->checkBox_26->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_22->isChecked())
         {ui->checkBox_22->setCheckState(Qt::Unchecked);}
+    limitscar=">=";
+    ignorecar=0;
 }
 
 void MainWindow::on_checkBox_26_clicked()
@@ -258,6 +368,8 @@ void MainWindow::on_checkBox_26_clicked()
         {ui->checkBox_22->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_27->isChecked())
         {ui->checkBox_27->setCheckState(Qt::Unchecked);}
+    limitscar="<=";
+    ignorecar=0;
 }
 
 void MainWindow::on_checkBox_28_clicked()
@@ -266,6 +378,8 @@ void MainWindow::on_checkBox_28_clicked()
         {ui->checkBox_32->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_33->isChecked())
         {ui->checkBox_33->setCheckState(Qt::Unchecked);}
+    //limitsvA="not relate to ";
+    ignorevA=1;
 }
 
 void MainWindow::on_checkBox_32_clicked()
@@ -274,6 +388,8 @@ void MainWindow::on_checkBox_32_clicked()
         {ui->checkBox_33->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_28->isChecked())
         {ui->checkBox_28->setCheckState(Qt::Unchecked);}
+    limitsvA="<=";
+    ignorevA=0;
 }
 
 void MainWindow::on_checkBox_33_clicked()
@@ -282,6 +398,8 @@ void MainWindow::on_checkBox_33_clicked()
         {ui->checkBox_28->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_32->isChecked())
         {ui->checkBox_32->setCheckState(Qt::Unchecked);}
+    limitsvA=">=";
+    ignorevA=0;
 }
 
 void MainWindow::on_checkBox_34_clicked()
@@ -290,6 +408,8 @@ void MainWindow::on_checkBox_34_clicked()
         {ui->checkBox_39->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_38->isChecked())
         {ui->checkBox_38->setCheckState(Qt::Unchecked);}
+   // limitsca="not relate to ";
+    ignoreca=1;
 }
 
 void MainWindow::on_checkBox_39_clicked()
@@ -298,6 +418,8 @@ void MainWindow::on_checkBox_39_clicked()
         {ui->checkBox_38->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_34->isChecked())
         {ui->checkBox_34->setCheckState(Qt::Unchecked);}
+    limitsca=">=";
+    ignoreca=0;
 }
 
 void MainWindow::on_checkBox_38_clicked()
@@ -306,6 +428,8 @@ void MainWindow::on_checkBox_38_clicked()
         {ui->checkBox_39->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_34->isChecked())
         {ui->checkBox_34->setCheckState(Qt::Unchecked);}
+    limitsca="<=";
+    ignoreca=0;
 }
 
 void MainWindow::on_checkBox_15_clicked()
@@ -314,6 +438,8 @@ void MainWindow::on_checkBox_15_clicked()
         {ui->checkBox_13->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_14->isChecked())
         {ui->checkBox_14->setCheckState(Qt::Unchecked);}
+    limitsfat=">=";
+    ignorefat=0;
 }
 
 void MainWindow::on_checkBox_14_clicked()
@@ -322,6 +448,8 @@ void MainWindow::on_checkBox_14_clicked()
         {ui->checkBox_15->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_13->isChecked())
         {ui->checkBox_13->setCheckState(Qt::Unchecked);}
+    limitsfat="<=";
+    ignorefat=0;
 }
 
 void MainWindow::on_checkBox_13_clicked()
@@ -330,6 +458,8 @@ void MainWindow::on_checkBox_13_clicked()
         {ui->checkBox_15->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_14->isChecked())
         {ui->checkBox_14->setCheckState(Qt::Unchecked);}
+    //limitsfat="not relate to ";
+    ignorefat=1;
 }
 
 void MainWindow::on_checkBox_16_clicked()
@@ -338,6 +468,9 @@ void MainWindow::on_checkBox_16_clicked()
         {ui->checkBox_18->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_17->isChecked())
         {ui->checkBox_17->setCheckState(Qt::Unchecked);}
+    //limitscho="not relate to ";
+    ignorecho=1;
+
 }
 
 void MainWindow::on_checkBox_17_clicked()
@@ -346,6 +479,8 @@ void MainWindow::on_checkBox_17_clicked()
         {ui->checkBox_16->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_18->isChecked())
         {ui->checkBox_18->setCheckState(Qt::Unchecked);}
+    limitscho="<=";
+    ignorecho=0;
 }
 
 void MainWindow::on_checkBox_18_clicked()
@@ -354,6 +489,8 @@ void MainWindow::on_checkBox_18_clicked()
         {ui->checkBox_16->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_17->isChecked())
         {ui->checkBox_17->setCheckState(Qt::Unchecked);}
+    limitscho=">=";
+    ignorecho=0;
 }
 
 void MainWindow::on_checkBox_21_clicked()
@@ -362,6 +499,8 @@ void MainWindow::on_checkBox_21_clicked()
         {ui->checkBox_19->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_20->isChecked())
         {ui->checkBox_20->setCheckState(Qt::Unchecked);}
+    limitsna=">=";
+    ignorena=0;
 }
 
 void MainWindow::on_checkBox_20_clicked()
@@ -370,6 +509,8 @@ void MainWindow::on_checkBox_20_clicked()
         {ui->checkBox_19->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_21->isChecked())
         {ui->checkBox_21->setCheckState(Qt::Unchecked);}
+    limitsna="<=";
+    ignorena=0;
 }
 
 void MainWindow::on_checkBox_19_clicked()
@@ -378,6 +519,8 @@ void MainWindow::on_checkBox_19_clicked()
         {ui->checkBox_20->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_21->isChecked())
         {ui->checkBox_21->setCheckState(Qt::Unchecked);}
+    //limitsna="not relate to ";
+    ignorena=1;
 }
 
 void MainWindow::on_checkBox_25_clicked()
@@ -386,6 +529,8 @@ void MainWindow::on_checkBox_25_clicked()
         {ui->checkBox_23->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_24->isChecked())
         {ui->checkBox_24->setCheckState(Qt::Unchecked);}
+    limitsfib=">=";
+    ignorefib=0;
 }
 
 void MainWindow::on_checkBox_24_clicked()
@@ -394,6 +539,8 @@ void MainWindow::on_checkBox_24_clicked()
         {ui->checkBox_23->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_25->isChecked())
         {ui->checkBox_25->setCheckState(Qt::Unchecked);}
+    limitsfib="<=";
+    ignorefib=0;
 }
 
 void MainWindow::on_checkBox_23_clicked()
@@ -402,6 +549,8 @@ void MainWindow::on_checkBox_23_clicked()
         {ui->checkBox_25->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_24->isChecked())
         {ui->checkBox_24->setCheckState(Qt::Unchecked);}
+    limitsfib="not relate to ";
+    ignorefib=1;
 }
 
 void MainWindow::on_checkBox_29_clicked()
@@ -410,6 +559,8 @@ void MainWindow::on_checkBox_29_clicked()
         {ui->checkBox_30->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_31->isChecked())
         {ui->checkBox_31->setCheckState(Qt::Unchecked);}
+    //limitsvC="not relate to ";
+    ignorevC=1;
 }
 
 void MainWindow::on_checkBox_30_clicked()
@@ -418,6 +569,8 @@ void MainWindow::on_checkBox_30_clicked()
         {ui->checkBox_29->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_31->isChecked())
         {ui->checkBox_31->setCheckState(Qt::Unchecked);}
+    limitsvC="<=";
+    ignorevC=0;
 }
 
 void MainWindow::on_checkBox_31_clicked()
@@ -426,6 +579,8 @@ void MainWindow::on_checkBox_31_clicked()
         {ui->checkBox_29->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_30->isChecked())
         {ui->checkBox_30->setCheckState(Qt::Unchecked);}
+    limitsvC=">=";
+    ignorevC=0;
 }
 
 void MainWindow::on_checkBox_37_clicked()
@@ -434,6 +589,7 @@ void MainWindow::on_checkBox_37_clicked()
         {ui->checkBox_36->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_35->isChecked())
         {ui->checkBox_35->setCheckState(Qt::Unchecked);}
+    //limits=">=";
 }
 
 void MainWindow::on_checkBox_36_clicked()
@@ -442,6 +598,7 @@ void MainWindow::on_checkBox_36_clicked()
         {ui->checkBox_35->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_37->isChecked())
         {ui->checkBox_37->setCheckState(Qt::Unchecked);}
+   //limits="<=";
 }
 
 void MainWindow::on_checkBox_35_clicked()

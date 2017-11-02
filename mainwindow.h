@@ -38,6 +38,31 @@ public:
     double carbohydrate;
     double calcium;
     double fat;
+
+    int ignorecost=1;
+    int ignorepro=1;
+    int ignorecal=1;
+    int ignorevA=1;
+    int ignorecho=1;
+    int ignorena=1;
+    int ignorefib=1;
+    int ignorevC=1;
+    int ignorecar=1;
+    int ignoreca=1;
+    int ignorefat=1;
+    QString limitscost=" not relate to ";
+    QString limitscal=" not relate to ";
+    QString limitspro=" not relate to ";
+    QString limitscar=" not relate to ";
+    QString limitsvA=" not relate to ";
+    QString limitsca=" not relate to ";
+    QString limitsfat=" not relate to ";
+    QString limitscho=" not relate to ";
+    QString limitsna=" not relate to ";
+    QString limitsfib=" not relate to ";
+    QString limitsvC=" not relate to ";
+    QString limitsbla=" not relate to ";
+
     QString fatt;
     QString calciumt;
     QString carbohydratet;

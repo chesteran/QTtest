@@ -742,7 +742,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>vitamin C(mg)</string>
+     <string>vitamin C(IU)</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEditvitA">
