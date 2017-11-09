@@ -7,9 +7,10 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QDir>
 #include "foodlist.h"
 
-#define NUM_FOOD 6
+#define NUM_FOOD 5
 
 #include "programming.h"
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,8 +18,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)  
 {
     ui->setupUi(this);
-
-
+    ui->textEditcal->setText("2000");
+    ui->textEditcho->setText("0");
+    ui->textEditfat->setText("0");
+    ui->textEditna->setText("0");
+    ui->textEditcar->setText("0");
+    ui->textEditfib->setText("25");
+    ui->textEditpro->setText("50");
+    ui->textEditvitA->setText("5000");
+    ui->textEditvitC->setText("50");
+    ui->textEditca->setText("800");
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +36,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_pushButton_clicked()
-{   bodyweightt=ui->textEditwg->toPlainText();
+{
+    bodyweightt=ui->textEditwg->toPlainText();
     bodyweight=bodyweightt.toDouble();
     moneyt=ui->textEditcost->toPlainText();
     money=moneyt.toInt();
@@ -51,7 +61,7 @@ void MainWindow::on_pushButton_clicked()
     fiber=fibert.toDouble();
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
-//money cal pro carbo vA ca fat chol so fib vc
+    //money cal pro carbo vA ca fat chol so fib vc
     ///set equation
   /*  double A[5][11] = {
             {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
@@ -63,12 +73,11 @@ void MainWindow::on_pushButton_clicked()
     */
 
     double A[NUM_FOOD][11] = {
-            {100,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
-            {100,23.7,0.0,0.1,19.2,5.6,1.6,0.6,15471,5.1,14.9},
-            {100,72.2,0.0,0.6,2.5,17.1,2.0,2.5,106.6,5.2,3.3},
-            {100,46.4,0.0,0.3,3.8,11.3,2.6,0.8,133.0,74.5,19.8},
-            {100,99.6,211.2,7.3,168.0,1.3,0.0,6.7,409.2,0.1,42.6},
-            {100,369.4,56.4,20.6,802.0,26.7,0.0,20.7,855.0,2.2,220.6}
+            {0.16,73.8,8.0,13.6,5867.4,159.0,0.8,0.0,68.2,8.5,160.2},
+            {0.07,23.7,0.6,5.6,15471.0,14.9,0.1,0.0,19.2,1.6,5.1},
+            {0.18,72.2,2.5,17.1,106.6,3.3,0.6,0.0,2.5,2.0,5.2},
+            {0.49,46.4,0.8,11.3,133.0,19.8,0.3,0.0,3.8,2.6,74.5},
+            {0.59,369.4,20.7,26.7,855.0,220.6,20.6,56.4,802.0,0.0,2.2}
     };
 
     //money
@@ -244,9 +253,10 @@ buf.setTextCursor(cursor);
     ///write file
     QFile file;
     file.setFileName("model");
-    file.open(QIODevice::Append | QIODevice::Text);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << buf.toPlainText() << endl;
+    std::cout << QDir::currentPath().toStdString() << std::endl;
 
     programming=new ProGramming(this, buf.toPlainText());
     programming->show();
