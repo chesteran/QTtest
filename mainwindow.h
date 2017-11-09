@@ -38,30 +38,30 @@ public:
     double carbohydrate;
     double calcium;
     double fat;
-
-    int ignorecost=1;
-    int ignorepro=1;
-    int ignorecal=1;
-    int ignorevA=1;
-    int ignorecho=1;
-    int ignorena=1;
-    int ignorefib=1;
-    int ignorevC=1;
-    int ignorecar=1;
-    int ignoreca=1;
-    int ignorefat=1;
-    QString limitscost=" not relate to ";
-    QString limitscal=" not relate to ";
-    QString limitspro=" not relate to ";
-    QString limitscar=" not relate to ";
-    QString limitsvA=" not relate to ";
-    QString limitsca=" not relate to ";
-    QString limitsfat=" not relate to ";
-    QString limitscho=" not relate to ";
-    QString limitsna=" not relate to ";
-    QString limitsfib=" not relate to ";
-    QString limitsvC=" not relate to ";
-    QString limitsbla=" not relate to ";
+    int objective=0; //0=cost 1=cal 2=carbon 3=pro/fat 4=fat
+    int ignorecost=0;
+    int ignorepro=0;
+    int ignorecal=0;
+    int ignorevA=0;
+    int ignorecho=0;
+    int ignorena=0;
+    int ignorefib=0;
+    int ignorevC=0;
+    int ignorecar=0;
+    int ignoreca=0;
+    int ignorefat=0;
+    QString limitscost=" >= ";
+    QString limitscal=" >= ";
+    QString limitspro=" >= ";
+    QString limitscar=" >= ";
+    QString limitsvA=" >=  ";
+    QString limitsca=" >=  ";
+    QString limitsfat=" >=  ";
+    QString limitscho=" >=  ";
+    QString limitsna=" >=  ";
+    QString limitsfib=" >=  ";
+    QString limitsvC=" >=  ";
+    QString limitsbla=" >=  ";
 
     QString fatt;
     QString calciumt;
@@ -152,6 +152,16 @@ private slots:
     void on_checkBox_35_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_radioButton_1_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_3_clicked();
+
+    void on_radioButton_4_clicked();
+
+    void on_radioButton_9_clicked();
 
 private:
     Ui::MainWindow *ui;

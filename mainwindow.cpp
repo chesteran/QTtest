@@ -1,13 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
-#include<QtGui>
-#include<QString>
-#include<QTextEdit>
+#include <QtGui>
+#include <QString>
+#include <QTextEdit>
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
 #include "foodlist.h"
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #define NUM_FOOD 6
 
@@ -51,7 +54,8 @@ void MainWindow::on_pushButton_clicked()
     fiber=fibert.toDouble();
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
-//money cal pro carbo vA ca fat chol so fib vc
+
+//money cal pro carbon
     ///set equation
   /*  double A[5][11] = {
             {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
@@ -71,19 +75,71 @@ void MainWindow::on_pushButton_clicked()
             {100,369.4,56.4,20.6,802.0,26.7,0.0,20.7,855.0,2.2,220.6}
     };
 
-    //money
+    //objective 0=cost 1=cal 2=carbon 3=pro/fat 4=fat
     QTextEdit buf;
     QTextCursor cursor = buf.textCursor();
     buf.insertPlainText("min z = ");
     buf.moveCursor(QTextCursor::End);
+    if(objective==0){
     buf.insertPlainText(QString::number(A[0][0]) + "x" + QString::number(0));
     buf.moveCursor(QTextCursor::End);
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
         buf.moveCursor(QTextCursor::End);
     }
+  }
+    else if(objective==1){
+        buf.insertPlainText(QString::number(A[0][1]) + "x" + QString::number(0));
+        buf.moveCursor(QTextCursor::End);
+        for (int i = 1; i < NUM_FOOD; i++){
+            buf.insertPlainText(" + " + QString::number(A[i][1]) + "x" + QString::number(i));
+            buf.moveCursor(QTextCursor::End);
+        }
+    }
+    else if(objective==2){
+        buf.insertPlainText(QString::number(A[0][3]) + "x" + QString::number(0));
+        buf.moveCursor(QTextCursor::End);
+        for (int i = 1; i < NUM_FOOD; i++){
+            buf.insertPlainText(" + " + QString::number(A[i][3]) + "x" + QString::number(i));
+            buf.moveCursor(QTextCursor::End);
+        }
+    }
+    else if(objective==3){
+        buf.insertPlainText(QString::number(A[0][2]/(A[0][6]+1)) + "x" + QString::number(0));
+        buf.moveCursor(QTextCursor::End);
+        for (int i = 1; i < NUM_FOOD; i++){
+            buf.insertPlainText(" + " + QString::number(A[i][2]/(A[i][6]+1)) + "x" + QString::number(i));
+            buf.moveCursor(QTextCursor::End);
+        }
+    }
+    else if(objective==4){
+        buf.insertPlainText(QString::number(A[0][2]) + "x" + QString::number(0));
+        buf.moveCursor(QTextCursor::End);
+        for (int i = 1; i < NUM_FOOD; i++){
+            buf.insertPlainText(" + " + QString::number(A[i][2]) + "x" + QString::number(i));
+            buf.moveCursor(QTextCursor::End);
+        }
+    }
+    //money
+    if(objective!=0){
+    buf.append(QString::number(A[0][0]) + "x" + QString::number(0));
+    for (int i = 1; i < NUM_FOOD; i++){
+        buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
+        buf.moveCursor(QTextCursor::End);
+    }
+    buf.insertPlainText(limitscost + QString::number(money));
+    if(ignorecost){
 
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+buf.setTextCursor(cursor);
+}
+    }
+   // }
     //kcal
+    if(objective !=1){
     buf.append(QString::number(A[0][1]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][1]) + "x" + QString::number(i));
@@ -101,9 +157,10 @@ cursor.deletePreviousChar(); // Added to trim the newline char when removing las
 buf.setTextCursor(cursor);
 }
 
-
+}
 
     //protein
+    if(objective!=4||objective!=3){
     buf.append(QString::number(A[0][2]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][2]) + "x" + QString::number(i));
@@ -112,13 +169,15 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitspro + QString::number(protein));
     if(ignorepro){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
-}
+      cursor.movePosition(QTextCursor::End);
+      cursor.select(QTextCursor::LineUnderCursor);
+      cursor.removeSelectedText();
+      cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+      buf.setTextCursor(cursor);
+                    }
+    }
     //carbohydrate
+    if(objective!=2){
     buf.append(QString::number(A[0][3]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][3]) + "x" + QString::number(i));
@@ -127,12 +186,13 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitscar + QString::number(carbohydrate));
     if(ignorecar){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
-}
+     cursor.movePosition(QTextCursor::End);
+     cursor.select(QTextCursor::LineUnderCursor);
+     cursor.removeSelectedText();
+     cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+     buf.setTextCursor(cursor);
+                }
+    }
     //vitaminA
     buf.append(QString::number(A[0][4]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
@@ -142,11 +202,11 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsvA + QString::number(vitaminA));
     if(ignorevA){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
     //calcium
     buf.append(QString::number(A[0][5]) + "x" + QString::number(0));
@@ -157,13 +217,14 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsca + QString::number(calcium));
     if(ignoreca){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
     //fat
+    if(objective!=3){
     buf.append(QString::number(A[0][6]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
         buf.insertPlainText(" + " + QString::number(A[i][6]) + "x" + QString::number(i));
@@ -172,12 +233,13 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsfat + QString::number(fat));
     if(ignorefat){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
-}
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
+                 }
+    }
     //cholesterol
     buf.append(QString::number(A[0][7]) + "x" + QString::number(0));
     for (int i = 1; i < NUM_FOOD; i++){
@@ -187,11 +249,11 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitscho + QString::number(cholesterol));
     if(ignorecho){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
     //sodium
     buf.append(QString::number(A[0][8]) + "x" + QString::number(0));
@@ -202,11 +264,11 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsna + QString::number(sodium));
     if(ignorena){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
     //fiber
     buf.append(QString::number(A[0][9]) + "x" + QString::number(0));
@@ -217,11 +279,11 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsfib + QString::number(fiber));
     if(ignorefib){
 
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
     //vitaminC
     buf.append(QString::number(A[0][10]) + "x" + QString::number(0));
@@ -232,11 +294,11 @@ buf.setTextCursor(cursor);
     buf.insertPlainText(limitsvC + QString::number(vitaminC));
     if(ignorevC){
 //QTextCursor cursor = buf.textCursor();
-cursor.movePosition(QTextCursor::End);
-cursor.select(QTextCursor::LineUnderCursor);
-cursor.removeSelectedText();
-cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
+    cursor.movePosition(QTextCursor::End);
+    cursor.select(QTextCursor::LineUnderCursor);
+    cursor.removeSelectedText();
+    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+    buf.setTextCursor(cursor);
 }
 
 
@@ -251,6 +313,7 @@ buf.setTextCursor(cursor);
     programming=new ProGramming(this, buf.toPlainText());
     programming->show();
 }
+
 
 void MainWindow::on_checkBox_5_clicked()
 {
@@ -616,3 +679,29 @@ void MainWindow::on_pushButton_2_clicked()
     foodlist->show();
 
 }
+
+void MainWindow::on_radioButton_1_clicked()
+{
+    objective=0;
+}
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    objective=1;
+}
+
+void MainWindow::on_radioButton_3_clicked()
+{
+    objective=2;
+}
+
+void MainWindow::on_radioButton_4_clicked()
+{
+    objective=3;
+}
+
+void MainWindow::on_radioButton_9_clicked()
+{
+    objective=4;
+}
+
