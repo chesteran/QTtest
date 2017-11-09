@@ -38,7 +38,11 @@ public:
     double carbohydrate;
     double calcium;
     double fat;
+<<<<<<< HEAD
 
+=======
+    int objective=0; //0=cost 1=cal 2=carbon 3=pro/fat 4=fat
+>>>>>>> b26b023b41d8584065a169420d9052a29f896e37
     int ignorecost=0;
     int ignorepro=0;
     int ignorecal=0;
@@ -54,6 +58,7 @@ public:
     QString limitscal=" >= ";
     QString limitspro=" >= ";
     QString limitscar=" >= ";
+<<<<<<< HEAD
     QString limitsvA=" >= ";
     QString limitsca=" >= ";
     QString limitsfat=" >= ";
@@ -62,6 +67,16 @@ public:
     QString limitsfib=" >= ";
     QString limitsvC=" >= ";
     QString limitsbla=" >= ";
+=======
+    QString limitsvA=" >=  ";
+    QString limitsca=" >=  ";
+    QString limitsfat=" >=  ";
+    QString limitscho=" >=  ";
+    QString limitsna=" >=  ";
+    QString limitsfib=" >=  ";
+    QString limitsvC=" >=  ";
+    QString limitsbla=" >=  ";
+>>>>>>> b26b023b41d8584065a169420d9052a29f896e37
 
     QString fatt;
     QString calciumt;
@@ -152,6 +167,16 @@ private slots:
     void on_checkBox_35_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_radioButton_1_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_3_clicked();
+
+    void on_radioButton_4_clicked();
+
+    void on_radioButton_9_clicked();
 
 private:
     Ui::MainWindow *ui;
