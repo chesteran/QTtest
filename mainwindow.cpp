@@ -64,12 +64,7 @@ void MainWindow::on_pushButton_clicked()
     fiber=fibert.toDouble();
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
-<<<<<<< HEAD
     //money cal pro carbo vA ca fat chol so fib vc
-=======
-
-//money cal pro carbon
->>>>>>> b26b023b41d8584065a169420d9052a29f896e37
     ///set equation
   /*  double A[5][11] = {
             {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
