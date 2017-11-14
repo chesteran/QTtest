@@ -4,8 +4,23 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QTextStream>
+#include <QtGui>
+#include <QString>
+#include <QTextEdit>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QDir>
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "foodlist.h"
 #include "programming.h"
+#include "gurobi_c++.h"
+
+using namespace std;
+
 namespace Ui {
 class MainWindow;
 }

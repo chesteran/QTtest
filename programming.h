@@ -2,6 +2,10 @@
 #define PROGRAMMING_H
 
 #include <QMainWindow>
+#include <iostream>
+#include "gurobi_c++.h"
+
+using namespace std;
 
 namespace Ui {
 class ProGramming;

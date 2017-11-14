@@ -1,21 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <iostream>
-#include <QtGui>
-#include <QString>
-#include <QTextEdit>
-#include <QFile>
-#include <QTextStream>
-#include <QMessageBox>
-#include <QDir>
-#include "foodlist.h"
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 #define NUM_FOOD 5
 
-#include "programming.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)  
@@ -64,17 +51,9 @@ void MainWindow::on_pushButton_clicked()
     fiber=fibert.toDouble();
     vitaminCt=ui->textEditvitC->toPlainText();
     vitaminC=vitaminCt.toDouble();
-    //money cal pro carbo vA ca fat chol so fib vc
-    ///set equation
-  /*  double A[5][11] = {
-            {0.16,73.8,0.0,0.8,68.2,13.6,8.5,8,5867.4,160.2,159},
-            {0.07,23.7,0,0.1,19.2,5.6,1.6,0.6,15471,5.1,14.9},
-            {0.06,171.5,0,0.2,15.2,19.9,3.2,3.7,0,15.6,22.7},
-            {0.84,277.4,129.9,10.8,125.6,0,0,42.2,77.4,0,21.9},
-            {0.78,358.2,0,12.3,1237.1,58.3,11.6,8.2,3055.2,27.9,80.2}
-    };
-    */
 
+    //money cal pro carbo vA ca fat chol so fib vc
+    //set equation
     double A[NUM_FOOD][11] = {
             {0.16,73.8,8.0,13.6,5867.4,159.0,0.8,0.0,68.2,8.5,160.2},
             {0.07,23.7,0.6,5.6,15471.0,14.9,0.1,0.0,19.2,1.6,5.1},
@@ -130,22 +109,21 @@ void MainWindow::on_pushButton_clicked()
     }
     //money
     if(objective!=0){
-    buf.append(QString::number(A[0][0]) + "x" + QString::number(0));
-    for (int i = 1; i < NUM_FOOD; i++){
-        buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
-        buf.moveCursor(QTextCursor::End);
-    }
-    buf.insertPlainText(limitscost + QString::number(money));
-    if(ignorecost){
+        buf.append(QString::number(A[0][0]) + "x" + QString::number(0));
+        for (int i = 1; i < NUM_FOOD; i++){
+            buf.insertPlainText(" + " + QString::number(A[i][0]) + "x" + QString::number(i));
+            buf.moveCursor(QTextCursor::End);
+        }
+        buf.insertPlainText(limitscost + QString::number(money));
+        if(ignorecost){
 
-    cursor.movePosition(QTextCursor::End);
-    cursor.select(QTextCursor::LineUnderCursor);
-    cursor.removeSelectedText();
-    cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
-buf.setTextCursor(cursor);
-}
+            cursor.movePosition(QTextCursor::End);
+            cursor.select(QTextCursor::LineUnderCursor);
+            cursor.removeSelectedText();
+            cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
+            buf.setTextCursor(cursor);
+        }
     }
-   // }
     //kcal
     if(objective !=1){
     buf.append(QString::number(A[0][1]) + "x" + QString::number(0));
@@ -308,8 +286,6 @@ buf.setTextCursor(cursor);
     cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
     buf.setTextCursor(cursor);
 }
-
-
 
     ///write file
     QFile file;
