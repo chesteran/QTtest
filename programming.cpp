@@ -18,40 +18,34 @@ void ProGramming::on_calculate_clicked()
 {
     try {
         GRBEnv env = GRBEnv();
-
-        GRBModel model = GRBModel(env);
-
-        // Create variables
-
-        GRBVar x = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "x");
-        GRBVar y = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "y");
-        GRBVar z = model.addVar(0.0, 1.0, 0.0, GRB_BINARY, "z");
-
-        // Set objective: maximize x + y + 2 z
-
-        model.setObjective(x + y + 2 * z, GRB_MAXIMIZE);
-
-        // Add constraint: x + 2 y + 3 z <= 4
-
-        model.addConstr(x + 2 * y + 3 * z <= 4, "c0");
-
-        // Add constraint: x + y >= 1
-
-        model.addConstr(x + y >= 1, "c1");
-
-        // Optimize model
+        GRBModel model = GRBModel(env, "model.lp");
 
         model.optimize();
 
-        cout << x.get(GRB_StringAttr_VarName) << " "
-             << x.get(GRB_DoubleAttr_X) << endl;
-        cout << y.get(GRB_StringAttr_VarName) << " "
-             << y.get(GRB_DoubleAttr_X) << endl;
-        cout << z.get(GRB_StringAttr_VarName) << " "
-             << z.get(GRB_DoubleAttr_X) << endl;
+        int optimstatus = model.get(GRB_IntAttr_Status);
 
-        cout << "Obj: " << model.get(GRB_DoubleAttr_ObjVal) << endl;
+        if (optimstatus == GRB_INF_OR_UNBD) {
+            model.set(GRB_IntParam_Presolve, 0);
+            model.optimize();
+            optimstatus = model.get(GRB_IntAttr_Status);
+        }
 
+        if (optimstatus == GRB_OPTIMAL) {
+            double objval = model.get(GRB_DoubleAttr_ObjVal);
+            cout << "Optimal objective: " << objval << endl;
+        } else if (optimstatus == GRB_INFEASIBLE) {
+            cout << "Model is infeasible" << endl;
+
+            // compute and write out IIS
+
+            model.computeIIS();
+            model.write("model.ilp");
+        } else if (optimstatus == GRB_UNBOUNDED) {
+            cout << "Model is unbounded" << endl;
+        } else {
+            cout << "Optimization was stopped with status = "
+                 << optimstatus << endl;
+        }
     } catch(GRBException e) {
         cout << "Error code = " << e.getErrorCode() << endl;
         cout << e.getMessage() << endl;
