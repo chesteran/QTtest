@@ -27,8 +27,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     foodlist.cpp \
-    programming.cpp \
-    simplex_copy.cpp
+    programming.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,9 +38,6 @@ FORMS += \
         mainwindow.ui \
     foodlist.ui \
     programming.ui
-
-INCLUDEPATH += \
-        /opt/gurobi751/linux64/include
 
 LIBS += -L /opt/gurobi751/linux64/lib -lgurobi_c++
 

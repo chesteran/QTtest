@@ -33,6 +33,35 @@ void ProGramming::on_calculate_clicked()
         if (optimstatus == GRB_OPTIMAL) {
             double objval = model.get(GRB_DoubleAttr_ObjVal);
             cout << "Optimal objective: " << objval << endl;
+
+            QFile in;
+            in.setFileName("Mat.csv");
+            in.open(QIODevice::ReadOnly);
+            QTextStream is(&in);
+            is.setCodec("UTF-8");
+            QByteArray line;
+            vector<QString> foodName;
+
+            int row = 0;
+            while(!in.atEnd()) {
+                line = in.readLine();
+                if (row > 0) {
+                    foodName.push_back(line.split(',').first());
+                }
+                row++;
+            }
+
+            QFile out;
+            out.setFileName("result.txt");
+            out.open(QIODevice::WriteOnly | QIODevice::Text);
+            QTextStream os(&out);
+            os.setCodec("UTF-8");
+            for (int k = 0; k < NUM_FOOD; k++) {
+                if (model.getVar(k).get(GRB_DoubleAttr_X) > 0) {
+                    os << foodName.at(k) << "|";
+                }
+                //cout << "x" << k << ": " << model.getVar(k).get(GRB_DoubleAttr_X) << endl;
+            }
         } else if (optimstatus == GRB_INFEASIBLE) {
             cout << "Model is infeasible" << endl;
 

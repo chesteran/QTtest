@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#define NUM_FOOD 5
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)  
@@ -54,6 +52,7 @@ void MainWindow::on_pushButton_clicked()
 
     //money cal pro carbo vA ca fat chol so fib vc
     //set equation
+    /*
     double A[NUM_FOOD][11] = {
             {0.16,73.8,8.0,13.6,5867.4,159.0,0.8,0.0,68.2,8.5,160.2},
             {0.07,23.7,0.6,5.6,15471.0,14.9,0.1,0.0,19.2,1.6,5.1},
@@ -61,6 +60,29 @@ void MainWindow::on_pushButton_clicked()
             {0.49,46.4,0.8,11.3,133.0,19.8,0.3,0.0,3.8,2.6,74.5},
             {0.59,369.4,20.7,26.7,855.0,220.6,20.6,56.4,802.0,0.0,2.2}
     };
+    */
+    double A[NUM_FOOD][11];
+    int row = 0;
+    QFile in;
+    in.setFileName("Mat.csv");
+    in.open(QIODevice::ReadOnly);
+    if (!in.isOpen()) {
+        qDebug() << in.errorString();
+        return;
+    }
+
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList list = line.split(QRegExp("\n|\r\n|\r|,"));
+        if (row > 0) {
+            for (int i = 0; i < 11; i++) {
+                A[row - 1][i] = list.at(i + 1).toDouble();
+            }
+        }
+        row++;
+    }
+
+    in.close();
 
     //objective 0=cost 1=cal 2=carbon 3=pro/fat 4=fat
     QTextEdit buf;
@@ -278,9 +300,16 @@ void MainWindow::on_pushButton_clicked()
         buf.setTextCursor(cursor);
     }
 
+    //buf.append(" cb: b0 + b1 + b2 + b3 + b4 = 3");
+
     buf.append("Bounds");
-    buf.append("Generals");
-    buf.append(" x0 x1 x2 x3 x4");
+    buf.append("Integer");
+    buf.append("");
+    for (int i = 0; i < NUM_FOOD; i++) {
+        buf.insertPlainText(" x" + QString::number(i));
+    }
+    //buf.append("binary");
+    //buf.append(" b0 b1 b2 b3 b4");
     buf.append("End");
 
     //write file
@@ -289,7 +318,6 @@ void MainWindow::on_pushButton_clicked()
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << buf.toPlainText() << endl;
-    std::cout << QDir::currentPath().toStdString() << std::endl;
 
     programming=new ProGramming(this, buf.toPlainText());
     programming->show();
@@ -302,7 +330,7 @@ void MainWindow::on_checkBox_5_clicked()
         {ui->checkBox_6->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_4->isChecked())
         {ui->checkBox_4->setCheckState(Qt::Unchecked);}
-    limitscost=">=";
+    limitscost=" >= ";
     ignorecost=0;
 }
 
@@ -312,7 +340,7 @@ void MainWindow::on_checkBox_4_clicked()
         {ui->checkBox_6->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_5->isChecked())
         {ui->checkBox_5->setCheckState(Qt::Unchecked);}
-    limitscost="<=";
+    limitscost="  <=  ";
     ignorecost=0;
 
 }
@@ -332,7 +360,7 @@ void MainWindow::on_checkBox_8_clicked()
         {ui->checkBox_7->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_9->isChecked())
         {ui->checkBox_9->setCheckState(Qt::Unchecked);}
-    limitscal=">=";
+    limitscal=" >= ";
     ignorecal=0;
 }
 
@@ -342,7 +370,7 @@ void MainWindow::on_checkBox_7_clicked()
         {ui->checkBox_8->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_9->isChecked())
         {ui->checkBox_9->setCheckState(Qt::Unchecked);}
-    limitscal="<=";
+    limitscal=" <= ";
     ignorecal=0;
 }
 
@@ -362,7 +390,7 @@ void MainWindow::on_checkBox_11_clicked()
         {ui->checkBox_10->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_12->isChecked())
         {ui->checkBox_12->setCheckState(Qt::Unchecked);}
-    limitspro=">=";
+    limitspro=" >= ";
     ignorepro=0;
 }
 
@@ -372,7 +400,7 @@ void MainWindow::on_checkBox_10_clicked()
         {ui->checkBox_11->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_12->isChecked())
         {ui->checkBox_12->setCheckState(Qt::Unchecked);}
-    limitspro="<=";
+    limitspro=" <= ";
     ignorepro=0;
 }
 
@@ -402,7 +430,7 @@ void MainWindow::on_checkBox_27_clicked()
         {ui->checkBox_26->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_22->isChecked())
         {ui->checkBox_22->setCheckState(Qt::Unchecked);}
-    limitscar=">=";
+    limitscar=" >= ";
     ignorecar=0;
 }
 
@@ -412,7 +440,7 @@ void MainWindow::on_checkBox_26_clicked()
         {ui->checkBox_22->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_27->isChecked())
         {ui->checkBox_27->setCheckState(Qt::Unchecked);}
-    limitscar="<=";
+    limitscar=" <= ";
     ignorecar=0;
 }
 
@@ -432,7 +460,7 @@ void MainWindow::on_checkBox_32_clicked()
         {ui->checkBox_33->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_28->isChecked())
         {ui->checkBox_28->setCheckState(Qt::Unchecked);}
-    limitsvA="<=";
+    limitsvA=" <= ";
     ignorevA=0;
 }
 
@@ -442,7 +470,7 @@ void MainWindow::on_checkBox_33_clicked()
         {ui->checkBox_28->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_32->isChecked())
         {ui->checkBox_32->setCheckState(Qt::Unchecked);}
-    limitsvA=">=";
+    limitsvA=" >= ";
     ignorevA=0;
 }
 
@@ -462,7 +490,7 @@ void MainWindow::on_checkBox_39_clicked()
         {ui->checkBox_38->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_34->isChecked())
         {ui->checkBox_34->setCheckState(Qt::Unchecked);}
-    limitsca=">=";
+    limitsca=" >= ";
     ignoreca=0;
 }
 
@@ -472,7 +500,7 @@ void MainWindow::on_checkBox_38_clicked()
         {ui->checkBox_39->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_34->isChecked())
         {ui->checkBox_34->setCheckState(Qt::Unchecked);}
-    limitsca="<=";
+    limitsca=" <= ";
     ignoreca=0;
 }
 
@@ -482,7 +510,7 @@ void MainWindow::on_checkBox_15_clicked()
         {ui->checkBox_13->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_14->isChecked())
         {ui->checkBox_14->setCheckState(Qt::Unchecked);}
-    limitsfat=">=";
+    limitsfat=" >= ";
     ignorefat=0;
 }
 
@@ -492,7 +520,7 @@ void MainWindow::on_checkBox_14_clicked()
         {ui->checkBox_15->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_13->isChecked())
         {ui->checkBox_13->setCheckState(Qt::Unchecked);}
-    limitsfat="<=";
+    limitsfat=" <= ";
     ignorefat=0;
 }
 
@@ -523,7 +551,7 @@ void MainWindow::on_checkBox_17_clicked()
         {ui->checkBox_16->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_18->isChecked())
         {ui->checkBox_18->setCheckState(Qt::Unchecked);}
-    limitscho="<=";
+    limitscho=" <= ";
     ignorecho=0;
 }
 
@@ -533,7 +561,7 @@ void MainWindow::on_checkBox_18_clicked()
         {ui->checkBox_16->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_17->isChecked())
         {ui->checkBox_17->setCheckState(Qt::Unchecked);}
-    limitscho=">=";
+    limitscho=" >= ";
     ignorecho=0;
 }
 
@@ -543,7 +571,7 @@ void MainWindow::on_checkBox_21_clicked()
         {ui->checkBox_19->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_20->isChecked())
         {ui->checkBox_20->setCheckState(Qt::Unchecked);}
-    limitsna=">=";
+    limitsna=" >= ";
     ignorena=0;
 }
 
@@ -553,7 +581,7 @@ void MainWindow::on_checkBox_20_clicked()
         {ui->checkBox_19->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_21->isChecked())
         {ui->checkBox_21->setCheckState(Qt::Unchecked);}
-    limitsna="<=";
+    limitsna=" <= ";
     ignorena=0;
 }
 
@@ -573,7 +601,7 @@ void MainWindow::on_checkBox_25_clicked()
         {ui->checkBox_23->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_24->isChecked())
         {ui->checkBox_24->setCheckState(Qt::Unchecked);}
-    limitsfib=">=";
+    limitsfib=" >= ";
     ignorefib=0;
 }
 
@@ -583,7 +611,7 @@ void MainWindow::on_checkBox_24_clicked()
         {ui->checkBox_23->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_25->isChecked())
         {ui->checkBox_25->setCheckState(Qt::Unchecked);}
-    limitsfib="<=";
+    limitsfib=" <= ";
     ignorefib=0;
 }
 
@@ -623,7 +651,7 @@ void MainWindow::on_checkBox_31_clicked()
         {ui->checkBox_29->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_30->isChecked())
         {ui->checkBox_30->setCheckState(Qt::Unchecked);}
-    limitsvC=">=";
+    limitsvC=" >= ";
     ignorevC=0;
 }
 
@@ -633,7 +661,7 @@ void MainWindow::on_checkBox_37_clicked()
         {ui->checkBox_36->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_35->isChecked())
         {ui->checkBox_35->setCheckState(Qt::Unchecked);}
-    //limits=">=";
+    //limits=" >= ";
 }
 
 void MainWindow::on_checkBox_36_clicked()
@@ -642,7 +670,7 @@ void MainWindow::on_checkBox_36_clicked()
         {ui->checkBox_35->setCheckState(Qt::Unchecked);}
     if (ui->checkBox_37->isChecked())
         {ui->checkBox_37->setCheckState(Qt::Unchecked);}
-   //limits="<=";
+   //limits=" <= ";
 }
 
 void MainWindow::on_checkBox_35_clicked()

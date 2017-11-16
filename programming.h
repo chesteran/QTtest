@@ -3,7 +3,11 @@
 
 #include <QMainWindow>
 #include <iostream>
+#include <QFile>
+#include <QTextStream>
 #include "gurobi_c++.h"
+
+#define NUM_FOOD 50
 
 using namespace std;
 
