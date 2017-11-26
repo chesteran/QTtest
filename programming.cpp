@@ -52,13 +52,13 @@ void ProGramming::on_calculate_clicked()
             }
 
             QFile out;
-            out.setFileName("result.txt");
+            out.setFileName("recipe.txt");
             out.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream os(&out);
             os.setCodec("UTF-8");
             for (int k = 0; k < NUM_FOOD; k++) {
                 if (model.getVar(k).get(GRB_DoubleAttr_X) > 0) {
-                    os << foodName.at(k) << "|";
+                    os << foodName.at(k) << "*";
                 }
                 //cout << "x" << k << ": " << model.getVar(k).get(GRB_DoubleAttr_X) << endl;
             }
