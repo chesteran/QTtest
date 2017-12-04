@@ -35,7 +35,7 @@ void ProGramming::on_calculate_clicked()
             cout << "Optimal objective: " << objval << endl;
 
             QFile in;
-            in.setFileName("Mat.csv");
+            in.setFileName("/home/user/下載/QTtest-master/Mat.csv");
             in.open(QIODevice::ReadOnly);
             QTextStream is(&in);
             is.setCodec("UTF-8");
@@ -52,7 +52,7 @@ void ProGramming::on_calculate_clicked()
             }
 
             QFile out;
-            out.setFileName("recipe.txt");
+            out.setFileName("/home/user/下載/build-testQT-Desktop_Qt_5_9_1_GCC_64bit-Debug/recipe.txt");
             out.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream os(&out);
             os.setCodec("UTF-8");

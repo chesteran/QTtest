@@ -64,7 +64,7 @@ void MainWindow::on_pushButton_clicked()
     double A[NUM_FOOD][11];
     int row = 0;
     QFile in;
-    in.setFileName("Mat.csv");
+    in.setFileName("/home/user/下載/QTtest-master/Mat.csv");
     in.open(QIODevice::ReadOnly);
     if (!in.isOpen()) {
         qDebug() << in.errorString();
@@ -299,10 +299,24 @@ void MainWindow::on_pushButton_clicked()
         cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
         buf.setTextCursor(cursor);
     }
-
+//y1,y2,,,,,
+//y1+y2+..=3
     //buf.append(" cb: b0 + b1 + b2 + b3 + b4 = 3");
-
+    buf.append("");
+    for(int i=0;i<NUM_FOOD;i++){
+        buf.insertPlainText(" c"+ QString::number(60+i) +": " + " x" + QString::number(i) +" - "+"20000y"+QString::number(i)+" <= 0"+"\n");
+        buf.insertPlainText(" c"+ QString::number(61+i) +": " + " y" + QString::number(i) +" - "+"20000x" + QString::number(i)+" <= 0"+"\n");
+    }
+    for(int i=0;i<NUM_FOOD-1;i++){
+     buf.insertPlainText("y"+QString::number(i)+"+");
+    }
+    buf.insertPlainText("y"+QString::number(49)+" = 3\n");
     buf.append("Bounds");
+    buf.append("Binary\n");
+  //  buf.append("");
+    for (int i = 0; i < NUM_FOOD; i++) {
+        buf.insertPlainText(" y" + QString::number(i));
+    }
     buf.append("Integer");
     buf.append("");
     for (int i = 0; i < NUM_FOOD; i++) {
@@ -683,9 +697,64 @@ void MainWindow::on_checkBox_35_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    QTextEdit foodbuf;
+    QTextCursor cursor = foodbuf.textCursor();
+   // banlist
+   /* QFile foodin;
+    foodin.setFileName("/home/user/下載/QTtest-master/Mat.csv");
+    foodin.open(QIODevice::ReadOnly);
+       if (!foodin.isOpen()) {
+           qDebug() << foodin.errorString();
+        return;
+       }
 
-    foodlist=new FoodList(this);
+      // QStringList dataList;
+       while (!foodin.atEnd()) {
+           QString line = foodin.readLine();
+           foodbuf.append(line.split(",").first());
+       }
+       foodin.close();*/
+    //foodbuf.insertPlainText("e04");
+
+       //qDebug() << foodbuf;
+/*QStringList firstColumn;
+QFile f1("h:/1.txt");
+f1.open(QIODevice::ReadOnly);
+QTextStream s1(&f1);
+while (!in.atEnd()){
+  QString s=s1.readLine(); // reads line from file
+  firstColumn.append(s.split(",").first()); // appends first column to list, ',' is separator
+}
+f1.close();*/
+
+   /* programming=new ProGramming(this, buf.toPlainText());
+    programming->show();*/
+ //QCheckBox foodbox[50];
+    QFile in;
+    in.setFileName("/home/user/下載/QTtest-master/Mat.csv");
+    in.open(QIODevice::ReadOnly);
+    QTextStream is(&in);
+    is.setCodec("UTF-8");
+    QByteArray line;
+   // vector<QString> foodName;
+
+    int row = 0;
+    while(!in.atEnd()) {
+        line = in.readLine();
+        if (row > 0) {
+           // foodbuf.insertPlainText(row+" ");
+
+            foodbuf.append(line.split(',').first());
+          //  foodName.push_back(line.split(',').first());
+        }
+        row++;
+    }
+
+
+    foodlist=new FoodList(this,foodbuf.toPlainText());
     foodlist->show();
+
+
 
 }
 

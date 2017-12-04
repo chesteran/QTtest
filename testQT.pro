@@ -39,11 +39,12 @@ FORMS += \
     foodlist.ui \
     programming.ui
 
-LIBS += -L /opt/gurobi751/linux64/lib -lgurobi_c++
+LIBS += -L /opt/gurobi752/linux64/lib -lgurobi_c++
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../opt/gurobi751/linux64/lib/release/ -lgurobi75
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../opt/gurobi751/linux64/lib/debug/ -lgurobi75
-else:unix: LIBS += -L$$PWD/../../../opt/gurobi751/linux64/lib/ -lgurobi75
 
-INCLUDEPATH += $$PWD/../../../opt/gurobi751/linux64/include
-DEPENDPATH += $$PWD/../../../opt/gurobi751/linux64/include
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../opt/gurobi752/linux64/lib/release/ -lgurobi75
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../opt/gurobi752/linux64/lib/debug/ -lgurobi75
+else:unix: LIBS += -L$$PWD/../../../../opt/gurobi752/linux64/lib/ -lgurobi75
+
+INCLUDEPATH += $$PWD/../../../../opt/gurobi752/linux64/include
+DEPENDPATH += $$PWD/../../../../opt/gurobi752/linux64/include
