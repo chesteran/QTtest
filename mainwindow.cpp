@@ -64,7 +64,7 @@ void MainWindow::on_pushButton_clicked()
     double A[NUM_FOOD][11];
     int row = 0;
     QFile in;
-    in.setFileName("/home/user/下載/QTtest-master/Mat.csv");
+    in.setFileName("Mat.csv");
     in.open(QIODevice::ReadOnly);
     if (!in.isOpen()) {
         qDebug() << in.errorString();
@@ -76,7 +76,7 @@ void MainWindow::on_pushButton_clicked()
         QStringList list = line.split(QRegExp("\n|\r\n|\r|,"));
         if (row > 0) {
             for (int i = 0; i < 11; i++) {
-                A[row - 1][i] = list.at(i + 1).toDouble();
+                A[row - 1][i] = list.at(i + 2).toDouble();
             }
         }
         row++;
@@ -299,21 +299,20 @@ void MainWindow::on_pushButton_clicked()
         cursor.deletePreviousChar(); // Added to trim the newline char when removing last line
         buf.setTextCursor(cursor);
     }
-//y1,y2,,,,,
-//y1+y2+..=3
-    //buf.append(" cb: b0 + b1 + b2 + b3 + b4 = 3");
+    //y1,y2,,,,,
+    //y1+y2+..=3
     buf.append("");
     for(int i=0;i<NUM_FOOD;i++){
-        buf.insertPlainText(" c"+ QString::number(60+i) +": " + " x" + QString::number(i) +" - "+"20000y"+QString::number(i)+" <= 0"+"\n");
-        buf.insertPlainText(" c"+ QString::number(61+i) +": " + " y" + QString::number(i) +" - "+"20000x" + QString::number(i)+" <= 0"+"\n");
+        buf.insertPlainText(" c" + QString::number(60+i) + ": x" + QString::number(i) + " - 1000000 y" + QString::number(i) + " <= 0\n");
+        buf.insertPlainText(" c" + QString::number(61+i) + ": y" + QString::number(i) + " - 1000000 x" + QString::number(i) + " <= 0\n");
     }
+    buf.insertPlainText(" c" + QString::number(60 + NUM_FOOD + 1) + ": ");
     for(int i=0;i<NUM_FOOD-1;i++){
-     buf.insertPlainText("y"+QString::number(i)+"+");
+        buf.insertPlainText("y" + QString::number(i) + " + ");
     }
     buf.insertPlainText("y"+QString::number(49)+" = 3\n");
     buf.append("Bounds");
     buf.append("Binary\n");
-  //  buf.append("");
     for (int i = 0; i < NUM_FOOD; i++) {
         buf.insertPlainText(" y" + QString::number(i));
     }
@@ -322,8 +321,6 @@ void MainWindow::on_pushButton_clicked()
     for (int i = 0; i < NUM_FOOD; i++) {
         buf.insertPlainText(" x" + QString::number(i));
     }
-    //buf.append("binary");
-    //buf.append(" b0 b1 b2 b3 b4");
     buf.append("End");
 
     //write file

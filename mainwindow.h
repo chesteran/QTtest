@@ -19,7 +19,7 @@
 #include "programming.h"
 #include "gurobi_c++.h"
 
-#define NUM_FOOD 50
+#define NUM_FOOD 433
 
 using namespace std;
 
