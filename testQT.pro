@@ -27,17 +27,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     foodlist.cpp \
-    programming.cpp
+    programming.cpp \
+    dietdisplay.cpp
 
 HEADERS += \
         mainwindow.h \
     foodlist.h \
-    programming.h
+    programming.h \
+    dietdisplay.h
 
 FORMS += \
         mainwindow.ui \
     foodlist.ui \
-    programming.ui
+    programming.ui \
+    dietdisplay.ui
 
 LIBS += -L /opt/gurobi752/linux64/lib -lgurobi_c++
 

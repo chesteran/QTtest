@@ -1,49 +1,190 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "dietdisplay.h"
+#include "ui_dietdisplay.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)  
+DietdisPlay::DietdisPlay(QWidget *parent,int gender,int age) :
+    QDialog(parent),
+    ui(new Ui::DietdisPlay)
 {
+
     ui->setupUi(this);
-    ui->textEditcal->setText("2400");
-    ui->textEditcho->setText("0");
-    ui->textEditfat->setText("0");
-    ui->textEditna->setText("0");
-    ui->textEditcar->setText("0");
-    ui->textEditfib->setText("0");
-    ui->textEditpro->setText("60");
-    ui->textEditvitA->setText("600");
-    ui->textEditvitC->setText("100");
-    ui->textEditca->setText("1200");
-    ui->textgender->setText("0");
-    ui->textage->setText("30");
-    ui->textEditca->hide();
-    ui->textEditcal->hide();
-    ui->textEditcar->hide();
-    ui->textEditcho->hide();
-    ui->textEditcost->hide();
-    ui->textEditfat->hide();
-    ui->textEditfib->hide();
-    ui->textEditna->hide();
-    ui->textEditpro->hide();
-    ui->textEditvitA->hide();
-    ui->textEditvitC->hide();
+    dage=age;
+    dgender=gender;
+    if(dgender==0){
+       if(dage>0&&dage<=15)
+       {   ui->textEditcal->setText("2800");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("70");
+           ui->textEditvitA->setText("600");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1200");}
+       else if(dage>15&&dage<=20)
+       {   ui->textEditcal->setText("2900");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("75");
+           ui->textEditvitA->setText("700");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1200");}
+       else if(dage>20&&dage<=30)
+       {   ui->textEditcal->setText("2400");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("60");
+           ui->textEditvitA->setText("600");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1200");}
+       else if(dage>30&&dage<=40)
+       {   ui->textEditcal->setText("2400");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("60");
+           ui->textEditvitA->setText("600");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1200");}
+       else if(dage>40&&dage<=50)
+       {   ui->textEditcal->setText("2400");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("60");
+           ui->textEditvitA->setText("600");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1200");}
+       else if(dage>50&&dage<=60)
+       {   ui->textEditcal->setText("2250");
+           ui->textEditcho->setText("0");
+           ui->textEditfat->setText("0");
+           ui->textEditna->setText("0");
+           ui->textEditcar->setText("0");
+           ui->textEditfib->setText("0");
+           ui->textEditpro->setText("55");
+           ui->textEditvitA->setText("600");
+           ui->textEditvitC->setText("100");
+           ui->textEditca->setText("1000");}
+       else if(dage>60)
+       {
+                ui->textEditcal->setText("2150");
+                ui->textEditcho->setText("0");
+                ui->textEditfat->setText("0");
+                ui->textEditna->setText("0");
+                ui->textEditcar->setText("0");
+                ui->textEditfib->setText("0");
+                ui->textEditpro->setText("60");
+                ui->textEditvitA->setText("600");
+                ui->textEditvitC->setText("100");
+                ui->textEditca->setText("1000");}
+
+       }
+       else if(dgender==1)
+      {
+           if(dage>0&&dage<=15)
+           {   ui->textEditcal->setText("2350");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("70");
+               ui->textEditvitA->setText("600");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1200");}
+           else if(dage>15&&dage<=20)
+           {   ui->textEditcal->setText("2250");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("55");
+               ui->textEditvitA->setText("500");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1200");}
+           else if(dage>20&&dage<=30)
+           {   ui->textEditcal->setText("1900");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("50");
+               ui->textEditvitA->setText("500");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1200");}
+           else if(dage>30&&dage<=40)
+           {   ui->textEditcal->setText("1900");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("50");
+               ui->textEditvitA->setText("500");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1200");}
+           else if(dage>40&&dage<=50)
+           {   ui->textEditcal->setText("1900");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("50");
+               ui->textEditvitA->setText("500");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1200");}
+           else if(dage>50&&dage<=60)
+           {   ui->textEditcal->setText("1800");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("50");
+               ui->textEditvitA->setText("500");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1000");}
+           else if(dage>60)
+           {   ui->textEditcal->setText("1700");
+               ui->textEditcho->setText("0");
+               ui->textEditfat->setText("0");
+               ui->textEditna->setText("0");
+               ui->textEditcar->setText("0");
+               ui->textEditfib->setText("0");
+               ui->textEditpro->setText("60");
+               ui->textEditvitA->setText("600");
+               ui->textEditvitC->setText("100");
+               ui->textEditca->setText("1000");
+           }
+
+       }
 }
 
-MainWindow::~MainWindow()
+DietdisPlay::~DietdisPlay()
 {
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void DietdisPlay::on_pushButton_clicked()
 {
-    gendert=ui->textgender->toPlainText();
-    gender=gendert.toInt();
-    aget=ui->textage->toPlainText();
-    age=aget.toInt();
-    if(gender==0){
-    if(age>0&&age<=15)
+  //  bodyweightt=ui->textEditwg->toPlainText();
+  //  bodyweight=bodyweightt.toDouble();
+/*    if(dgender==0){
+    if(dage>0&&dage<=15)
     {   ui->textEditcal->setText("2800");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -54,7 +195,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("600");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1200");}
-    else if(age>15&&age<=20)
+    else if(dage>15&&dage<=20)
     {   ui->textEditcal->setText("2900");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -65,7 +206,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("700");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1200");}
-    else if(age>20&&age<=30)
+    else if(dage>20&&dage<=30)
     {   ui->textEditcal->setText("2400");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -76,7 +217,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("600");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1200");}
-    else if(age>30&&age<=40)
+    else if(dage>30&&dage<=40)
     {   ui->textEditcal->setText("2400");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -87,7 +228,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("600");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1200");}
-    else if(age>40&&age<=50)
+    else if(dage>40&&dage<=50)
     {   ui->textEditcal->setText("2400");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -98,7 +239,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("600");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1200");}
-    else if(age>50&&age<=60)
+    else if(dage>50&&dage<=60)
     {   ui->textEditcal->setText("2250");
         ui->textEditcho->setText("0");
         ui->textEditfat->setText("0");
@@ -109,7 +250,7 @@ void MainWindow::on_pushButton_clicked()
         ui->textEditvitA->setText("600");
         ui->textEditvitC->setText("100");
         ui->textEditca->setText("1000");}
-    else if(age>60)
+    else if(dage>60)
     {
              ui->textEditcal->setText("2150");
              ui->textEditcho->setText("0");
@@ -123,9 +264,9 @@ void MainWindow::on_pushButton_clicked()
              ui->textEditca->setText("1000");}
 
     }
-    else if(gender==1)
+    else if(dgender==1)
    {
-        if(age>0&&age<=15)
+        if(dage>0&&dage<=15)
         {   ui->textEditcal->setText("2350");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -136,7 +277,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("600");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1200");}
-        else if(age>15&&age<=20)
+        else if(dage>15&&dage<=20)
         {   ui->textEditcal->setText("2250");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -147,7 +288,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("500");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1200");}
-        else if(age>20&&age<=30)
+        else if(dage>20&&dage<=30)
         {   ui->textEditcal->setText("1900");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -158,7 +299,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("500");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1200");}
-        else if(age>30&&age<=40)
+        else if(dage>30&&dage<=40)
         {   ui->textEditcal->setText("1900");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -169,7 +310,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("500");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1200");}
-        else if(age>40&&age<=50)
+        else if(dage>40&&dage<=50)
         {   ui->textEditcal->setText("1900");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -180,7 +321,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("500");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1200");}
-        else if(age>50&&age<=60)
+        else if(dage>50&&dage<=60)
         {   ui->textEditcal->setText("1800");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -191,7 +332,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditvitA->setText("500");
             ui->textEditvitC->setText("100");
             ui->textEditca->setText("1000");}
-        else if(age>60)
+        else if(dage>60)
         {   ui->textEditcal->setText("1700");
             ui->textEditcho->setText("0");
             ui->textEditfat->setText("0");
@@ -204,7 +345,7 @@ void MainWindow::on_pushButton_clicked()
             ui->textEditca->setText("1000");
         }
 
-    }
+    }*/
     moneyt=ui->textEditcost->toPlainText();
     money=moneyt.toInt();
     kcalt=ui->textEditcal->toPlainText();
@@ -239,7 +380,7 @@ void MainWindow::on_pushButton_clicked()
             {0.59,369.4,20.7,26.7,855.0,220.6,20.6,56.4,802.0,0.0,2.2}
     };
     */
-   double A[NUM_FOOD][11];
+    double A[NUM_FOOD][11];
     int row = 0;
     QFile in;
     in.setFileName("Mat.csv");
@@ -308,7 +449,7 @@ void MainWindow::on_pushButton_clicked()
         }
     }
 
-   buf.append("Subject To");
+    buf.append("Subject To");
     //money
     if(objective != 0){
         buf.append(" c0: " + QString::number(A[0][0]) + " x" + QString::number(0));
@@ -479,7 +620,7 @@ void MainWindow::on_pushButton_clicked()
     }
     //y1,y2,,,,,
     //y1+y2+..=3
-   buf.append("");
+    buf.append("");
     for(int i=0;i<NUM_FOOD;i++){
         buf.insertPlainText(" c" + QString::number(60+i) + ": x" + QString::number(i) + " - 1000000 y" + QString::number(i) + " <= 0\n");
         buf.insertPlainText(" c" + QString::number(61+i) + ": y" + QString::number(i) + " - 1000000 x" + QString::number(i) + " <= 0\n");
@@ -507,104 +648,366 @@ void MainWindow::on_pushButton_clicked()
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
     out << buf.toPlainText() << endl;
-
+    /*               */
     programming=new ProGramming(this, buf.toPlainText());
     programming->show();
 }
 
 
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    QTextEdit foodbuf;
-    QTextCursor cursor = foodbuf.textCursor();
-   // banlist
-   /* QFile foodin;
-    foodin.setFileName("/home/user/下載/QTtest-master/Mat.csv");
-    foodin.open(QIODevice::ReadOnly);
-       if (!foodin.isOpen()) {
-           qDebug() << foodin.errorString();
-        return;
-       }
-
-      // QStringList dataList;
-       while (!foodin.atEnd()) {
-           QString line = foodin.readLine();
-           foodbuf.append(line.split(",").first());
-       }
-       foodin.close();*/
-    //foodbuf.insertPlainText("e04");
-
-       //qDebug() << foodbuf;
-/*QStringList firstColumn;
-QFile f1("h:/1.txt");
-f1.open(QIODevice::ReadOnly);
-QTextStream s1(&f1);
-while (!in.atEnd()){
-  QString s=s1.readLine(); // reads line from file
-  firstColumn.append(s.split(",").first()); // appends first column to list, ',' is separator
-}
-f1.close();*/
-
-   /* programming=new ProGramming(this, buf.toPlainText());
-    programming->show();*/
- //QCheckBox foodbox[50];
-    QFile in;
-    in.setFileName("/home/user/下載/QTtest-master/Mat.csv");
-    in.open(QIODevice::ReadOnly);
-    QTextStream is(&in);
-    is.setCodec("UTF-8");
-    QByteArray line;
-   // vector<QString> foodName;
-
-    int row = 0;
-    while(!in.atEnd()) {
-        line = in.readLine();
-        if (row > 0) {
-           // foodbuf.insertPlainText(row+" ");
-
-            foodbuf.append(line.split(',').first());
-          //  foodName.push_back(line.split(',').first());
-        }
-        row++;
-    }
-
-
-    foodlist=new FoodList(this,foodbuf.toPlainText());
-    foodlist->show();
-
-
-
-}
-/*
-void MainWindow::on_radioButton_1_clicked()
+void DietdisPlay::on_radioButton_1_clicked()
 {
     objective=0;
 }
 
-void MainWindow::on_radioButton_2_clicked()
+void DietdisPlay::on_radioButton_2_clicked()
 {
-    objective=1;
+     objective=1;
 }
 
-void MainWindow::on_radioButton_3_clicked()
+void DietdisPlay::on_radioButton_3_clicked()
 {
     objective=2;
 }
 
-void MainWindow::on_radioButton_4_clicked()
+void DietdisPlay::on_radioButton_4_clicked()
 {
-    objective=3;
+     objective=3;
 }
 
-void MainWindow::on_radioButton_9_clicked()
+void DietdisPlay::on_radioButton_9_clicked()
 {
-    objective=4;
+     objective=4;
 }
-*/
 
-void MainWindow::on_pushButton_3_clicked()
+
+void DietdisPlay::on_checkBox_5_clicked()
 {
-    dietdisplay= new DietdisPlay(this,gender,age);
-    dietdisplay->show();
+    if (ui->checkBox_6->isChecked())
+        {ui->checkBox_6->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_4->isChecked())
+        {ui->checkBox_4->setCheckState(Qt::Unchecked);}
+    limitscost=" >= ";
+    ignorecost=0;
+}
+
+void DietdisPlay::on_checkBox_4_clicked()
+{
+    if (ui->checkBox_6->isChecked())
+        {ui->checkBox_6->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_5->isChecked())
+        {ui->checkBox_5->setCheckState(Qt::Unchecked);}
+    limitscost="  <=  ";
+    ignorecost=0;
+}
+
+void DietdisPlay::on_checkBox_6_clicked()
+{
+
+    if (ui->checkBox_5->isChecked())
+        {ui->checkBox_5->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_4->isChecked())
+        {ui->checkBox_4->setCheckState(Qt::Unchecked);}
+    ignorecost=1;
+}
+
+void DietdisPlay::on_checkBox_8_clicked()
+{
+    if (ui->checkBox_7->isChecked())
+        {ui->checkBox_7->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_9->isChecked())
+        {ui->checkBox_9->setCheckState(Qt::Unchecked);}
+    limitscal=" >= ";
+    ignorecal=0;
+}
+
+void DietdisPlay::on_checkBox_7_clicked()
+{
+    if (ui->checkBox_8->isChecked())
+        {ui->checkBox_8->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_9->isChecked())
+        {ui->checkBox_9->setCheckState(Qt::Unchecked);}
+    limitscal=" <= ";
+    ignorecal=0;
+}
+
+void DietdisPlay::on_checkBox_9_clicked()
+{
+    if (ui->checkBox_7->isChecked())
+        {ui->checkBox_7->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_8->isChecked())
+        {ui->checkBox_8->setCheckState(Qt::Unchecked);}
+   // limitscal="not relate to ";
+    ignorecal=1;
+}
+
+void DietdisPlay::on_checkBox_11_clicked()
+{
+    if (ui->checkBox_10->isChecked())
+        {ui->checkBox_10->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_12->isChecked())
+        {ui->checkBox_12->setCheckState(Qt::Unchecked);}
+    limitspro=" >= ";
+    ignorepro=0;
+}
+
+void DietdisPlay::on_checkBox_10_clicked()
+{
+    if (ui->checkBox_11->isChecked())
+        {ui->checkBox_11->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_12->isChecked())
+        {ui->checkBox_12->setCheckState(Qt::Unchecked);}
+    limitspro=" <= ";
+    ignorepro=0;
+}
+
+void DietdisPlay::on_checkBox_12_clicked()
+{
+    if (ui->checkBox_10->isChecked())
+        {ui->checkBox_10->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_11->isChecked())
+        {ui->checkBox_11->setCheckState(Qt::Unchecked);}
+    //limitspro="not relate to ";
+    ignorepro=1;
+}
+
+void DietdisPlay::on_checkBox_27_clicked()
+{
+    if (ui->checkBox_26->isChecked())
+        {ui->checkBox_26->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_22->isChecked())
+        {ui->checkBox_22->setCheckState(Qt::Unchecked);}
+    limitscar=" >= ";
+    ignorecar=0;
+}
+
+void DietdisPlay::on_checkBox_22_clicked()
+{
+    if (ui->checkBox_26->isChecked())
+        {ui->checkBox_26->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_27->isChecked())
+        {ui->checkBox_27->setCheckState(Qt::Unchecked);}
+    //limitscar="not relate to ";
+    ignorecar=1;
+}
+
+void DietdisPlay::on_checkBox_26_clicked()
+{
+    if (ui->checkBox_22->isChecked())
+        {ui->checkBox_22->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_27->isChecked())
+        {ui->checkBox_27->setCheckState(Qt::Unchecked);}
+    limitscar=" <= ";
+    ignorecar=0;
+}
+
+void DietdisPlay::on_checkBox_33_clicked()
+{
+    if (ui->checkBox_28->isChecked())
+        {ui->checkBox_28->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_32->isChecked())
+        {ui->checkBox_32->setCheckState(Qt::Unchecked);}
+    limitsvA=" >= ";
+    ignorevA=0;
+}
+
+void DietdisPlay::on_checkBox_32_clicked()
+{
+    if (ui->checkBox_33->isChecked())
+        {ui->checkBox_33->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_28->isChecked())
+        {ui->checkBox_28->setCheckState(Qt::Unchecked);}
+    limitsvA=" <= ";
+    ignorevA=0;
+}
+
+void DietdisPlay::on_checkBox_28_clicked()
+{
+    if (ui->checkBox_32->isChecked())
+        {ui->checkBox_32->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_33->isChecked())
+        {ui->checkBox_33->setCheckState(Qt::Unchecked);}
+    //limitsvA="not relate to ";
+    ignorevA=1;
+}
+
+void DietdisPlay::on_checkBox_39_clicked()
+{
+    if (ui->checkBox_38->isChecked())
+        {ui->checkBox_38->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_34->isChecked())
+        {ui->checkBox_34->setCheckState(Qt::Unchecked);}
+    limitsca=" >= ";
+    ignoreca=0;
+}
+
+void DietdisPlay::on_checkBox_38_clicked()
+{
+    if (ui->checkBox_39->isChecked())
+        {ui->checkBox_39->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_34->isChecked())
+        {ui->checkBox_34->setCheckState(Qt::Unchecked);}
+    limitsca=" <= ";
+    ignoreca=0;
+}
+
+void DietdisPlay::on_checkBox_34_clicked()
+{
+    if (ui->checkBox_39->isChecked())
+        {ui->checkBox_39->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_38->isChecked())
+        {ui->checkBox_38->setCheckState(Qt::Unchecked);}
+   // limitsca="not relate to ";
+    ignoreca=1;
+}
+
+void DietdisPlay::on_checkBox_15_clicked()
+{
+    if (ui->checkBox_13->isChecked())
+        {ui->checkBox_13->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_14->isChecked())
+        {ui->checkBox_14->setCheckState(Qt::Unchecked);}
+    limitsfat=" >= ";
+    ignorefat=0;
+}
+
+void DietdisPlay::on_checkBox_14_clicked()
+{
+    if (ui->checkBox_15->isChecked())
+        {ui->checkBox_15->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_13->isChecked())
+        {ui->checkBox_13->setCheckState(Qt::Unchecked);}
+    limitsfat=" <= ";
+    ignorefat=0;
+}
+
+void DietdisPlay::on_checkBox_13_clicked()
+{
+
+    if (ui->checkBox_15->isChecked())
+        {ui->checkBox_15->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_14->isChecked())
+        {ui->checkBox_14->setCheckState(Qt::Unchecked);}
+    //limitsfat="not relate to ";
+    ignorefat=1;
+}
+
+void DietdisPlay::on_checkBox_18_clicked()
+{
+    if (ui->checkBox_16->isChecked())
+        {ui->checkBox_16->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_17->isChecked())
+        {ui->checkBox_17->setCheckState(Qt::Unchecked);}
+    limitscho=" >= ";
+    ignorecho=0;
+}
+
+void DietdisPlay::on_checkBox_17_clicked()
+{
+    if (ui->checkBox_16->isChecked())
+        {ui->checkBox_16->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_18->isChecked())
+        {ui->checkBox_18->setCheckState(Qt::Unchecked);}
+    limitscho=" <= ";
+    ignorecho=0;
+}
+
+void DietdisPlay::on_checkBox_16_clicked()
+{
+    if (ui->checkBox_18->isChecked())
+        {ui->checkBox_18->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_17->isChecked())
+        {ui->checkBox_17->setCheckState(Qt::Unchecked);}
+    //limitscho="not relate to ";
+    ignorecho=1;
+}
+
+void DietdisPlay::on_checkBox_21_clicked()
+{
+    if (ui->checkBox_19->isChecked())
+        {ui->checkBox_19->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_20->isChecked())
+        {ui->checkBox_20->setCheckState(Qt::Unchecked);}
+    limitsna=" >= ";
+    ignorena=0;
+}
+
+void DietdisPlay::on_checkBox_20_clicked()
+{
+    if (ui->checkBox_19->isChecked())
+        {ui->checkBox_19->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_21->isChecked())
+        {ui->checkBox_21->setCheckState(Qt::Unchecked);}
+    limitsna=" <= ";
+    ignorena=0;
+}
+
+void DietdisPlay::on_checkBox_19_clicked()
+{
+    if (ui->checkBox_20->isChecked())
+        {ui->checkBox_20->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_21->isChecked())
+        {ui->checkBox_21->setCheckState(Qt::Unchecked);}
+    //limitsna="not relate to ";
+    ignorena=1;
+}
+
+void DietdisPlay::on_checkBox_25_clicked()
+{
+    if (ui->checkBox_23->isChecked())
+        {ui->checkBox_23->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_24->isChecked())
+        {ui->checkBox_24->setCheckState(Qt::Unchecked);}
+    limitsfib=" >= ";
+    ignorefib=0;
+}
+
+void DietdisPlay::on_checkBox_24_clicked()
+{
+    if (ui->checkBox_23->isChecked())
+        {ui->checkBox_23->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_25->isChecked())
+        {ui->checkBox_25->setCheckState(Qt::Unchecked);}
+    limitsfib=" <= ";
+    ignorefib=0;
+}
+
+void DietdisPlay::on_checkBox_23_clicked()
+{
+
+    if (ui->checkBox_25->isChecked())
+        {ui->checkBox_25->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_24->isChecked())
+        {ui->checkBox_24->setCheckState(Qt::Unchecked);}
+    limitsfib="not relate to ";
+    ignorefib=1;
+}
+
+void DietdisPlay::on_checkBox_31_clicked()
+{
+    if (ui->checkBox_29->isChecked())
+        {ui->checkBox_29->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_30->isChecked())
+        {ui->checkBox_30->setCheckState(Qt::Unchecked);}
+    limitsvC=" >= ";
+    ignorevC=0;
+}
+
+void DietdisPlay::on_checkBox_30_clicked()
+{
+    if (ui->checkBox_29->isChecked())
+        {ui->checkBox_29->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_31->isChecked())
+        {ui->checkBox_31->setCheckState(Qt::Unchecked);}
+    limitsvC="<=";
+    ignorevC=0;
+}
+
+void DietdisPlay::on_checkBox_29_clicked()
+{
+    if (ui->checkBox_30->isChecked())
+        {ui->checkBox_30->setCheckState(Qt::Unchecked);}
+    if (ui->checkBox_31->isChecked())
+        {ui->checkBox_31->setCheckState(Qt::Unchecked);}
+    //limitsvC="not relate to ";
+    ignorevC=1;
 }
