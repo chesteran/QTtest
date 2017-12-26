@@ -1,7 +1,6 @@
 #ifndef FOODLIST_H
 #define FOODLIST_H
 
-
 #include <QMainWindow>
 #include <QFile>
 #include <QTextStream>
@@ -11,11 +10,8 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDir>
-#include <iostream>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <QDialog>
+
 using namespace std;
 namespace Ui {
 class FoodList;

@@ -7,7 +7,7 @@
 #include <QTextStream>
 #include "gurobi_c++.h"
 
-#define NUM_FOOD 433
+#define NUM_FOOD 428
 
 using namespace std;
 

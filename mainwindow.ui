@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>caloriese</string>
+     <string>calories</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_3">
@@ -1041,7 +1041,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>687</width>
-     <height>28</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QDir>
+
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>
@@ -19,7 +20,7 @@
 #include "programming.h"
 #include "gurobi_c++.h"
 
-#define NUM_FOOD 433
+#define NUM_FOOD 428
 
 using namespace std;
 
@@ -36,15 +37,9 @@ public:
     ~MainWindow();
 public:
     int gender;
-    static void process_line(const QByteArray &)
-    {
-    }
-
-    static void process_line(const QString &)
-    {
-    }
-    int money;
     double bodyweight;
+
+    int money;
     double protein;
     double kcal;
     double vitaminA;
@@ -55,43 +50,36 @@ public:
     double carbohydrate;
     double calcium;
     double fat;
-    int objective=0; //0=cost 1=cal 2=carbon 3=pro/fat 4=fat
-    int ignorecost=0;
-    int ignorepro=0;
-    int ignorecal=0;
-    int ignorevA=0;
-    int ignorecho=0;
-    int ignorena=0;
-    int ignorefib=0;
-    int ignorevC=0;
-    int ignorecar=0;
-    int ignoreca=0;
-    int ignorefat=0;
-    QString limitscost=" >= ";
-    QString limitscal=" >= ";
-    QString limitspro=" >= ";
-    QString limitscar=" >= ";
-    QString limitsvA=" >= ";
-    QString limitsca=" >= ";
-    QString limitsfat=" >= ";
-    QString limitscho=" >= ";
-    QString limitsna=" >= ";
-    QString limitsfib=" >= ";
-    QString limitsvC=" >= ";
-    QString limitsbla=" >= ";
 
-    QString fatt;
-    QString calciumt;
-    QString carbohydratet;
-    QString fibert;
-    QString sodiumt;
-    QString cholesterolt;
-    QString moneyt;
-    QString bodyweightt;
-    QString proteint;
-    QString kcalt;
-    QString vitaminAt;
-    QString vitaminCt;
+    /*
+     * 0    1       2       3       4
+     * cost calorie carbon  pro/fat fat
+     */
+    int objective;
+    int ignorecost;
+    int ignorepro;
+    int ignorecal;
+    int ignorevA;
+    int ignorecho;
+    int ignorena;
+    int ignorefib;
+    int ignorevC;
+    int ignorecar;
+    int ignoreca;
+    int ignorefat;
+
+    QString limitscost;
+    QString limitscal;
+    QString limitspro;
+    QString limitscar;
+    QString limitsvA;
+    QString limitsca;
+    QString limitsfat;
+    QString limitscho;
+    QString limitsna;
+    QString limitsfib;
+    QString limitsvC;
+    QString limitsbla;
 
 private slots:
     void on_pushButton_clicked();
@@ -184,6 +172,8 @@ private:
     Ui::MainWindow *ui;
     FoodList *foodlist;
     ProGramming *programming;
+
+    void ignore(QTextEdit * textEdit);
 };
 
 #endif // MAINWINDOW_H
