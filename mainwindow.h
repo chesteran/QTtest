@@ -18,6 +18,7 @@
 
 #include "foodlist.h"
 #include "programming.h"
+#include "dietdisplay.h"
 #include "gurobi_c++.h"
 
 #define NUM_FOOD 428
@@ -37,6 +38,7 @@ public:
     ~MainWindow();
 public:
     int gender;
+    int age;
     double bodyweight;
 
     int money;
@@ -83,7 +85,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
+/*
     void on_checkBox_5_clicked();
 
     void on_checkBox_4_clicked();
@@ -155,9 +157,9 @@ private slots:
     void on_checkBox_36_clicked();
 
     void on_checkBox_35_clicked();
-
+*/
     void on_pushButton_2_clicked();
-
+/*
     void on_radioButton_1_clicked();
 
     void on_radioButton_2_clicked();
@@ -167,11 +169,14 @@ private slots:
     void on_radioButton_4_clicked();
 
     void on_radioButton_9_clicked();
+*/
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
     FoodList *foodlist;
     ProGramming *programming;
+    DietdisPlay *dietdisplay;
 
     void ignore(QTextEdit * textEdit);
 };

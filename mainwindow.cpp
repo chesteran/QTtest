@@ -33,16 +33,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ignoreca = 0;
     ignorefat = 0;
 
-    ui->textEditcal->setText("2000");
+    ui->textEditcal->setText("2400");
     ui->textEditcho->setText("0");
     ui->textEditfat->setText("0");
     ui->textEditna->setText("0");
     ui->textEditcar->setText("0");
-    ui->textEditfib->setText("25");
-    ui->textEditpro->setText("50");
-    ui->textEditvitA->setText("5000");
-    ui->textEditvitC->setText("50");
-    ui->textEditca->setText("800");
+    ui->textEditfib->setText("0");
+    ui->textEditpro->setText("60");
+    ui->textEditvitA->setText("600");
+    ui->textEditvitC->setText("100");
+    ui->textEditca->setText("1200");
+    ui->textgender->setText("0");
+    ui->textage->setText("30");
+    ui->textEditca->hide();
+    ui->textEditcal->hide();
+    ui->textEditcar->hide();
+    ui->textEditcho->hide();
+    ui->textEditcost->hide();
+    ui->textEditfat->hide();
+    ui->textEditfib->hide();
+    ui->textEditna->hide();
+    ui->textEditpro->hide();
+    ui->textEditvitA->hide();
+    ui->textEditvitC->hide();
 }
 
 MainWindow::~MainWindow()
@@ -52,7 +65,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    bodyweight = ui->textEditwg->toPlainText().toDouble();
+    //bodyweight = ui->textEditwg->toPlainText().toDouble();
     money = ui->textEditcost->toPlainText().toInt();
     kcal = ui->textEditcal->toPlainText().toDouble();
     protein = ui->textEditpro->toPlainText().toDouble();
@@ -72,6 +85,7 @@ void MainWindow::on_pushButton_clicked()
      *  money   calorie protien carbohydrat vitamin A   calcium fat cholesterol sodium  fiber   vitaminC
      */
     double A[NUM_FOOD][11];
+
     int row = 0;
     QFile in;
     in.setFileName("Mat.csv");
@@ -289,8 +303,7 @@ void MainWindow::on_pushButton_clicked()
     programming=new ProGramming(this, buf.toPlainText());
     programming->show();
 }
-
-
+/*
 void MainWindow::on_checkBox_5_clicked()
 {
     if (ui->checkBox_6->isChecked()) {
@@ -655,7 +668,7 @@ void MainWindow::on_checkBox_35_clicked()
     if (ui->checkBox_36->isChecked()) ui->checkBox_36->setCheckState(Qt::Unchecked);
     if (ui->checkBox_37->isChecked()) ui->checkBox_37->setCheckState(Qt::Unchecked);
 }
-
+*/
 void MainWindow::on_pushButton_2_clicked()
 {
     /**
@@ -684,31 +697,6 @@ void MainWindow::on_pushButton_2_clicked()
     */
 }
 
-void MainWindow::on_radioButton_1_clicked()
-{
-    objective=0;
-}
-
-void MainWindow::on_radioButton_2_clicked()
-{
-    objective=1;
-}
-
-void MainWindow::on_radioButton_3_clicked()
-{
-    objective=2;
-}
-
-void MainWindow::on_radioButton_4_clicked()
-{
-    objective=3;
-}
-
-void MainWindow::on_radioButton_9_clicked()
-{
-    objective=4;
-}
-
 void MainWindow::ignore(QTextEdit * textEdit)
 {
     textEdit->textCursor().movePosition(QTextCursor::End);
@@ -716,4 +704,10 @@ void MainWindow::ignore(QTextEdit * textEdit)
     textEdit->textCursor().removeSelectedText();
     textEdit->textCursor().deletePreviousChar();// Added to trim the newline char when removing last line
     textEdit->setTextCursor(textEdit->textCursor());
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    dietdisplay = new DietdisPlay(this, gender, age);
+    dietdisplay->show();
 }
