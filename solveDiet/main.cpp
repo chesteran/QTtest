@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
     if (argc != 2) {
         cerr << "argc" << endl;
-        //exit(1);
+        exit(1);
     }
 
     /*
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
      * read file
      * objective, target[], ignore[]
      */
-    inFile.setFileName("out");
+    inFile.setFileName(argv[1]);
     inFile.open(QIODevice::ReadOnly | QIODevice::Text);
     if (!inFile.isOpen()) {
         cerr << "file" << endl;
