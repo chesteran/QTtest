@@ -21,7 +21,7 @@
 #include "dietdisplay.h"
 #include "gurobi_c++.h"
 
-#define NUM_FOOD 428
+#define NUM_FOOD 427
 
 using namespace std;
 
