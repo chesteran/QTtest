@@ -37,10 +37,6 @@ int main(int argc, char *argv[])
     QFile outFile("model.lp");
     QTextStream textStream;
 
-    for (int i = 0; i < 11; ++i) {
-        limit[i] = QString(" >= ");
-    }
-
     if (argc != 2) {
         cerr << "argc" << endl;
         exit(1);
@@ -78,14 +74,24 @@ int main(int argc, char *argv[])
     }
     line = inFile.readLine();
     stringList = line.split(QRegExp("\n|\r\n|\r|,"));
-    objective = stringList.at(1).toInt();
+    objective = stringList.first().toInt();
     for (int i = 1; i < 11; ++i) {
         line = inFile.readLine();
         stringList = line.split(QRegExp("\n|\r\n|\r|,"));
-        target[i] = stringList.at(0).toInt();
-        ignore[i] = stringList.at(1).toInt();
+        target[i] = stringList.first().toInt();
+        line = inFile.readLine();
+        stringList = line.split(QRegExp("\n|\r\n|\r|,"));
+        ignore[i] = stringList.first().toInt();
     }
     inFile.close();
+
+    for (int i = 0; i < 11; ++i) {
+        if (ignore[i] == 2) {
+            limit[i] = QString(" <= ");
+        } else {
+            limit[i] = QString(" >= ");
+        }
+    }
 
     /*
      * write file
@@ -142,7 +148,7 @@ int main(int argc, char *argv[])
                 || (objective == 3 && i == fat)
                 || (objective == 4 && i == protien)) {
             continue;
-        } else {
+        } else if (ignore[i] != 0) {
             textStream << " c" << constraintNum++ << ": e" << errVarNum++;
             for (int j = 0; j < FOOD_NUM; j++) {
                textStream << " + " << table[j][i] << " x" << j;
@@ -194,25 +200,19 @@ int main(int argc, char *argv[])
     try {
         GRBEnv env = GRBEnv();
         GRBModel model = GRBModel(env, "model.lp");
-
         model.optimize();
-
         int optimstatus = model.get(GRB_IntAttr_Status);
-
         if (optimstatus == GRB_INF_OR_UNBD) {
             model.set(GRB_IntParam_Presolve, 0);
             model.optimize();
             optimstatus = model.get(GRB_IntAttr_Status);
         }
-
         if (optimstatus == GRB_OPTIMAL) {
             double objval = model.get(GRB_DoubleAttr_ObjVal);
             cout << "Optimal objective: " << objval << endl;
-
             inFile.setFileName("mat.csv");
             inFile.open(QIODevice::ReadOnly | QIODevice::Text);
             vector<QString> foodName;
-
             int row = 0;
             while(!inFile.atEnd()) {
                 line = inFile.readLine();
@@ -222,7 +222,6 @@ int main(int argc, char *argv[])
                 row++;
             }
             inFile.close();
-
             outFile.setFileName("recipe.txt");
             outFile.open(QIODevice::WriteOnly | QIODevice::Text);
             textStream.setDevice(&outFile);
@@ -233,6 +232,7 @@ int main(int argc, char *argv[])
                 }
             }
             outFile.close();
+            cout<<"8"<<endl;
         } else if (optimstatus == GRB_INFEASIBLE) {
             cout << "Model is infeasible" << endl;
             // compute and write out IIS

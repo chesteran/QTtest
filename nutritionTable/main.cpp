@@ -43,11 +43,11 @@ int main(int argc, char *argv[])
     }
     QString string = inFile.readLine();
     QStringList stringList = string.split(QRegExp("\n|\r\n|\r|,"));
-    if (stringList.at(0) == "male")
+    if (stringList.first() == "male")
     {
         gender = 0;
     }
-    else if (stringList.at(0) == "female")
+    else if (stringList.first() == "female")
     {
         gender = 1;
     }
@@ -250,11 +250,11 @@ int main(int argc, char *argv[])
             nutrition[calcium] = 1000;
         }
     }
-    ignore[cholesterol] = 1;
-    ignore[fat] = 1;
-    ignore[sodium] = 1;
-    ignore[carbohydrate] = 1;
-    ignore[fiber] = 1;
+    ignore[calorie] = 1;
+    ignore[protien] = 1;
+    ignore[vitaminA] = 1;
+    ignore[vitaminC] = 1;
+    ignore[calcium] = 1;
 
     /*
      * write file
@@ -262,8 +262,14 @@ int main(int argc, char *argv[])
      */
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream textStream(&outFile);
+    //default objective
+    textStream << 0 << endl;
+    //default cost
+    textStream << 0 << endl;
+    textStream << 0 << endl;
     for (int i = 0; i < 10; ++i) {
-        textStream << nutrition[i] << "," << ignore[i] << endl;
+        textStream << nutrition[i] << endl;
+        textStream << ignore[i] << endl;
     }
     outFile.close();
 
